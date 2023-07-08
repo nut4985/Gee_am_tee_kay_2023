@@ -1,5 +1,5 @@
 /// @desc ?
-room_goto(rRoom1)
+room_goto(FIRST_ROOM)
 
 
 
