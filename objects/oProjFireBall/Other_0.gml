@@ -1,0 +1,16 @@
+/// @desc ?
+instance_destroy()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
