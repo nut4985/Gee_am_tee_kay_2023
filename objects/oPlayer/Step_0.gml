@@ -1,13 +1,10 @@
 /// @desc ?
 // move towards the boss
-live_auto_call
 
-KeepDistanceToBoss()
-
-if (AttackCheck())
-{
-	AttackBoss()
-}
+statePrevious = currentState
+script_execute(currentState)
+stateEntered = statePrevious != currentState
+stateTimer = stateEntered ? 0 : stateTimer + 1
 
 KeepInBound()
 

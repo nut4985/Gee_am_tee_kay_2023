@@ -13,10 +13,15 @@ spdHor = 0
 spdVrt = 0
 */
 
-walkSpd = 1
+walkSpd = 1.5
 
+maxHp = 150
+hp = maxHp
 
-hp = 100
+playStepSet = FPS*0.2
+playStep = playStepSet
+
+lootTimer = FPS * 0.3
 
 function GetInputs()
 {
@@ -34,11 +39,28 @@ function MovePlayer()
 	x += keyHor * walkSpd
 	y += keyVrt * walkSpd
 	
+	KeepInBound()
 }
 
 function Hit(_damage)
 {
+	audio_play_sound(sndHit, 0, false, 0.4)
+	if currentState == BossStateDead exit
 	hp -= _damage
+	if(hp <= 0)
+	{
+		with(oWinLose)
+		{
+			lose()
+		}
+		with(oPlayer)
+		{
+			currentState = PlayerStateWin
+			stateEntered = true
+		}
+		currentState = BossStateDead
+		stateEntered = true
+	}
 }
 
 #region states
@@ -46,6 +68,7 @@ function Hit(_damage)
 currentState = BossStateNormal
 statePrevious = currentState
 stateEntered = true
+stateTimer = 0
 #endregion
 
 
